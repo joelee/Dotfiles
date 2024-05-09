@@ -1,0 +1,17 @@
+# $HOME/.config/alacritty/alacritty.toml
+# Joeworks Dotfiles (https://github.com/joelee/Dotfiles)
+#
+
+[window]
+opacity = 0.81
+
+padding.x = 8
+padding.y = 8
+
+class.instance = "Alacritty"
+class.general = "Alacritty"
+
+
+[scrolling]
+history = 20000
+multiplier = 3
