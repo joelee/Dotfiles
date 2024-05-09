@@ -33,6 +33,7 @@ pacman -S --noconfirm \
 	rclone \
 	rustup \
 	starship \
+	sxhkd \
 	wget \
 	zoxide \
 	zsh \
@@ -46,6 +47,7 @@ pacman -S --noconfirm \
 	alacritty \
 	bitwarden \
 	chromium \
+	conky \
 	discord \
 	firefox \
 	kitty \
