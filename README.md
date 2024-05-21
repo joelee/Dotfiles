@@ -8,7 +8,7 @@ cd $HOME
 git clone https://github.com/joelee/Dotfiles.git
 cd Dotfiles
 cp .env.sample .env
-# Edit the .env file 
+# Edit the .env file
 vim .env
 ```
 
