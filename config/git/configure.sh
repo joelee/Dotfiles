@@ -16,29 +16,13 @@ if [ -z "$(which git)" ]; then
     exit 1
 fi
 
-echo "0: ${BASE_PATH}"
-echo "1: ${DOTFILES_PATH}"
-echo "2: ${DOTFILES_LOCAL_PATH}"
-echo "U1: ${USER_NAME}"
-echo "U2: ${USER_EMAIL}"
-
-
-dotfiles_test 123
-
-# cat "$BASE_PATH/gitconfig"
-
-exit 0
-
 git_config="$HOME/.gitconfig"
 git_ignore="$HOME/.gitignore"
 
 echo "Configuring ${git_config} ..."
 
-backup_file "${git_config}"
-cp -f "${BASE_PATH}/gitconfig" "${git_config}"
-
-backup_file "${git_ignore}"
-cp -f "${BASE_PATH}/gitignore" "${git_ignore}"
+copy_file "${BASE_PATH}/gitconfig" "${git_config}"
+copy_file "${BASE_PATH}/gitignore" "${git_ignore}"
 
 if [ -n "${USER_NAME}" ]; then
     echo "  Setting up user name: ${USER_NAME}"

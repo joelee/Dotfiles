@@ -31,6 +31,7 @@ pacman -S --noconfirm \
 	fastfetch \
 	ffmpeg \
 	fish \
+	fisher \
 	fzf \
 	jq \
 	git \

@@ -5,14 +5,14 @@ dotfiles_test () {
 }
 
 backup_file () {
+    if [ -L "$1" ]; then
+        echo "Removing symlink: $1 ..."
+        rm -f "$1"
+    fi
     if [ -e "$1" ]; then
-        if [ -L "$1" ]; then
-            echo "Removing symlink: $1 ..."
-        else
-            bak_file="$1.$(date +%y%m%d%H%M%S).bak"
-            echo "  Backing up $1 => ${bak_file} ..."
-            mv "$1" "${bak_file}"
-        fi
+        bak_file="$1.$(date +%y%m%d%H%M%S).bak"
+        echo "  Backing up $1 => ${bak_file} ..."
+        mv "$1" "${bak_file}"
     fi
 }
 
@@ -31,9 +31,11 @@ symlink_file () {
         echo "Source file '$1' does not exists."
         exit 1
     fi
+    src_file="$(realpath --relative-to=$(dirname $2) $(dirname $1))/$(basename $1)"
+    chk_config_dir "$(dirname $2)"
     backup_file "$2"
-    echo "  Symlinking $1 => $2 ..."
-    ln -s "$1" "$2"
+    echo "  Symlinking $2 to ${src_file} ..."
+    ln -s "${src_file}" "$2"
 }
 
 copy_file () {
@@ -41,6 +43,7 @@ copy_file () {
         echo "Source file '$1' does not exists."
         exit 1
     fi
+    chk_config_dir "$(dirname $2)"
     backup_file "$2"
     echo "  Copying $1 => $2 ..."
     cp -f "$1" "$2"

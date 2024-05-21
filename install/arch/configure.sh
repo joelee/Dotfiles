@@ -11,3 +11,5 @@ else
 fi
 
 dot_configure git fish alacritty kitty starship tmux
+
+"${BASE_PATH}/../common/change-fish-shell"
