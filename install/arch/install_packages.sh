@@ -1,8 +1,26 @@
 #!/bin/bash
 #
 
+cd "$(dirname $0)/../.."
+BASE_PATH="$(pwd)"
+DOTFILES_LOCAL_PATH="${HOME}/.local/dotfiles"
+
+if [ ! -e "${DOTFILES_LOCAL_PATH}" ]; then
+	mkdir -p "${DOTFILES_LOCAL_PATH}"
+fi
+
+PACMAN="$(which pacman)"
+if [ -z "${PACMAN}" ]; then
+	echo "pacman not found. This script only works on Arch Linux based distribution"
+	exit 1
+fi
+
+echo "# Arch Linux package installation"
+echo "## Updating packages..."
 pacman -Syu
 
+echo ""
+echo "## Installing tty packages..."
 # Tty packages only. No Kernel and GUI packages.
 pacman -S --noconfirm \
 	btop \
@@ -12,6 +30,7 @@ pacman -S --noconfirm \
 	direnv \
 	fastfetch \
 	ffmpeg \
+	fish \
 	fzf \
 	jq \
 	git \
@@ -42,6 +61,9 @@ pacman -S --noconfirm \
 	zsh-history-substring-search \
 	zsh-syntax-highlighting
 
+
+echo ""
+echo "Install App packages..."
 # App packages from Arch repos
 pacman -S --noconfirm \
 	alacritty \
@@ -63,3 +85,7 @@ pacman -S --noconfirm \
 # Podman Desktop
 # VSCodium
 #
+
+touch "${DOTFILES_LOCAL_PATH}/packages_installed"
+echo ""
+echo "Package installation completed."

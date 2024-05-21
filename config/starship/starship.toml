@@ -1,0 +1,51 @@
+# ~/.config/starship.toml
+
+# Get editor completions based on the config schema
+"$schema" = 'https://starship.rs/config-schema.json'
+
+# Use custom format
+# format = '$all'
+
+# Wait 10 milliseconds for starship to check files under the current directory.
+scan_timeout = 10
+
+command_timeout = 5000
+
+# Disable the blank line at the start of the prompt
+add_newline = false
+
+# Set 'foo' as custom color palette
+palette = 'foo'
+
+# Define custom colors
+[palettes.foo]
+# Overwrite existing color
+blue = '21'
+# Define new color
+mustard = '#af8700'
+
+[aws]
+format = '‣ [$symbol($profile)(\($region\) )(\[$duration\] )]($style) '
+style = 'bold bright-blue'
+symbol = '🅰 '
+
+[aws.region_aliases]
+eu-west-1 = 'ir'
+eu-west-2 = 'uk'
+ap-southeast-2 = 'au'
+us-east-1 = 'va'
+
+[aws.profile_aliases]
+default = 'ø'
+
+[gcloud]
+disabled = true
+
+[memory_usage]
+format = '‣ $symbol[${ram_pct}]($style) '
+disabled = false
+threshold = 75
+style = 'bold bright-red'
+
+[python]
+format = '‣ [${symbol}${pyenv_prefix}(${version} )(\($virtualenv\) )]($style) '

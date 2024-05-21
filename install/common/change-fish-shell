@@ -1,0 +1,17 @@
+#!/bin/bash
+
+NEW_SHELL="fish"
+NEW_SHELL_PATH="/bin/$NEW_SHELL"
+
+if [ -z $(which $NEW_SHELL_PATH) ]; then
+    echo "${NEW_SHELL^} shell is not installed."
+    exit 1
+fi
+
+if [ "$SHELL" == "$NEW_SHELL_PATH" ]; then
+    echo "Your default shell is already ${NEW_SHELL^}."
+    exit 2
+fi
+
+echo "Changing your default shell from $SHELL to $NEW_SHELL_PATH"
+chsh -s $NEW_SHELL_PATH $USER
