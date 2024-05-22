@@ -14,3 +14,7 @@ end
 
 alias du="du -h"
 alias duu="du -d1 -h"
+
+alias vi=nvim
+alias nv=neovide
+alias nano=nvim

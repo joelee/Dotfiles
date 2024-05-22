@@ -1,5 +1,5 @@
 #!/bin/bash
-# Fish shell configuration set up
+# Kitty terminal configuration set up
 
 BASE_PATH="$(dirname $0)"
 source "$DOTFILES_HOME/init.sh"

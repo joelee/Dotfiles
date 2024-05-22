@@ -1,5 +1,5 @@
 #!/bin/bash
-# Alacritty configuration set up
+# QTile configuration set up
 
 BASE_PATH="$(dirname $0)"
 source "$DOTFILES_HOME/init.sh"

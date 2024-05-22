@@ -1,5 +1,5 @@
 #!/bin/bash
-# Starship configuration set up
+# Rust configuration set up
 
 BASE_PATH="$(dirname $0)"
 source "$DOTFILES_HOME/init.sh"
