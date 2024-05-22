@@ -2,12 +2,7 @@
 # GIT configuration set up
 
 BASE_PATH="$(dirname $0)"
-source "$BASE_PATH/../../init.sh"
-if [ -z "${DOTFILES_PATH}" ]; then
-    echo "DOTFILES_PATH was not defined. Run 'init.sh' from the Dotfiles directory first."
-    exit 1
-fi
-
+source "$DOTFILES_HOME/init.sh"
 
 # source "${DOTFILES_PATH}/install/common/common_functions.bash"
 

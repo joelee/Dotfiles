@@ -6,10 +6,14 @@ My personal dotfiles for Linux and MacOs
 ```bash
 cd $HOME
 git clone https://github.com/joelee/Dotfiles.git
+
 cd Dotfiles
+export DOTFILES_HOME="$(pwd)"
+
 cp .env.sample .env
 # Edit the .env file
 vim .env
+
 ```
 
 ### Arch Linux based distributions

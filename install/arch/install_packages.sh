@@ -1,13 +1,7 @@
 #!/bin/bash
 #
 
-cd "$(dirname $0)/../.."
-BASE_PATH="$(pwd)"
-DOTFILES_LOCAL_PATH="${HOME}/.local/dotfiles"
-
-if [ ! -e "${DOTFILES_LOCAL_PATH}" ]; then
-	mkdir -p "${DOTFILES_LOCAL_PATH}"
-fi
+source "$DOTFILES_HOME/init.sh"
 
 PACMAN="$(which pacman)"
 if [ -z "${PACMAN}" ]; then
@@ -52,6 +46,7 @@ pacman -S --noconfirm \
 	pre-commit \
 	pyenv \
 	rclone \
+	ruby \
 	rustup \
 	starship \
 	sxhkd \

@@ -1,7 +1,6 @@
 #!/bin/bash
 
 cd "$(dirname ${BASH_SOURCE[0]})"
-export DOTFILES_PATH="$(pwd)"
 export DOTFILES_LOCAL_PATH="${HOME}/.local/dotfiles"
 
 if [ ! -e "${DOTFILES_LOCAL_PATH}" ]; then
@@ -9,11 +8,9 @@ if [ ! -e "${DOTFILES_LOCAL_PATH}" ]; then
     touch "${DOTFILES_LOCAL_PATH}/init"
 fi
 
-if [ -e "${DOTFILES_PATH}/.env" ]; then
-    source "${DOTFILES_PATH}/.env"
+if [ -e "${DOTFILES_HOME}/.env" ]; then
+    source "${DOTFILES_HOME}/.env"
 fi
-echo "INIT: ${DOTFILES_PATH}"
+echo "INIT: ${DOTFILES_HOME}"
 
-source "${DOTFILES_PATH}/install/common/common_functions.bash"
-
-# ${DOTFILES_PATH}/config/git/configure.sh
+source "${DOTFILES_HOME}/install/common/common_functions.bash"

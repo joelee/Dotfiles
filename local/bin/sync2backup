@@ -1,0 +1,95 @@
+#!/bin/bash
+# Time-machine like Backup to an SSH Server
+
+source "$DOTFILES_HOME/init.sh"
+
+RSYNC="$(which rsync)"
+if [ -z "${RSYNC}" ]; then
+	echo "RSync not found."
+	exit 1
+fi
+
+if [ -z "${SSH_BACKUP_PREFIX}" ]; then
+	echo "SSH_BACKUP_PREFIX was not set in the .env file"
+	exit 99
+fi
+
+if [ -z "${SSH_BACKUP_PORT}" ]; then
+	SSH_BACKUP_PORT=22
+fi
+
+print_help() {
+	echo "Usage: "
+	echo "    $(basename $0) Source/Path [TargetEndpoint] [--dry-run] [--print] [--help]"
+	echo ""
+}
+
+# Process arguments
+for arg in "$@"; do
+	echo "Arg: $arg"
+	if [ "${arg}" == "--help" ]; then
+		print_help
+		exit 0
+	elif [ "${arg}" == "--dry-run" ]; then
+		dry_run="yes"
+	elif [ "${arg}" == "--print" ]; then
+		print_only="yes"
+	elif [ -z "${source_path}" ]; then
+		source_path="${arg}"
+	elif [ -z "${target_endpoint}" ]; then
+		target_endpoint="${arg}"
+	fi
+done
+
+if [ -z "${source_path}" ]; then
+	if [ -n "${SSH_BACKUP_DEFAULT_SOURCE}" ]; then
+		source_path="${SSH_BACKUP_DEFAULT_SOURCE}"
+	else
+		echo "Missing arguments. Source/Path is required."
+		echo " "
+		print_help
+		exit 1
+	fi
+fi
+
+if [ -z "${target_endpoint}" ]; then
+	if [ -n "${SSH_BACKUP_DEFAULT_TARGET}" ]; then
+		target_endpoint="${SSH_BACKUP_DEFAULT_TARGET}"
+	else
+		target_endpoint="$(hostname)/$(basename $1)"
+	fi
+fi
+
+ts="$(date +%y%m%d%H%M%S.%N)"
+log_path="${HOME}/.local/logs/rsync/${target_endpoint}"
+target_path="${SSH_BACKUP_PREFIX}/${target_endpoint}/"
+
+archive_opt="-azC --partial --delete --backup --backup-dir=.backup/${ts}"
+output_opt="-hi --log-file=${log_path}/${ts}.log"
+filter_opt="--exclude=.git --exclude=.backup --no-owner --no-group --no-perms"
+
+if [ ! -e "${log_path}" ]; then
+	mkdir -p "${log_path}"
+fi
+
+if [ -n "${dry_run}" ]; then
+	archive_opt="${archive_opt} --dry-run"
+fi
+
+echo "Sync2Backup: ${source_path} ==> ${target_path}"
+echo " "
+if [ -n "$print_only" ]; then
+	echo "$RSYNC ${archive_opt} ${output_opt} ${filter_opt} -e 'ssh -p ${SSH_BACKUP_PORT}' ${source_path}/* ${target_path}"
+	exit 0
+fi
+
+$RSYNC ${archive_opt} ${output_opt} ${filter_opt} -e "ssh -p ${SSH_BACKUP_PORT}" \
+    ${source_path}/* ${target_path}
+
+echo " "
+echo " "
+echo "Sync2Backup COMPLETED: ${source_path} ==> ${target_path}"
+echo " Logfile: ${log_path}/${ts}.log"
+echo " "
+
+exit 0

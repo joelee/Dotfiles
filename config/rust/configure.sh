@@ -2,7 +2,7 @@
 # Starship configuration set up
 
 BASE_PATH="$(dirname $0)"
-source "$BASE_PATH/../../init.sh"
+source "$DOTFILES_HOME/init.sh"
 
 RUSTUP="$(which rustup)"
 

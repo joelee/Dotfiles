@@ -4,7 +4,7 @@ echo "Work in progress: Not stable yet"
 exit 0
 
 BASE_PATH="$(dirname $0)"
-source "$BASE_PATH/../../init.sh"
+source "$DOTFILES_HOME/init.sh"
 
 BREW_FILE="${BASE_PATH}/Brewfile"
 
