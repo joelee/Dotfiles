@@ -1,6 +1,5 @@
 #!/bin/bash
 
-cd "$(dirname ${BASH_SOURCE[0]})"
 export DOTFILES_LOCAL_PATH="${HOME}/.local/dotfiles"
 
 if [ ! -e "${DOTFILES_LOCAL_PATH}" ]; then

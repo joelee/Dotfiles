@@ -45,6 +45,8 @@ pacman -S --noconfirm \
 	podman-docker \
 	pre-commit \
 	pyenv \
+	python-pipx \
+	python-poetry \
 	rclone \
 	ruby \
 	rustup \

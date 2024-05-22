@@ -1,0 +1,10 @@
+#!/bin/bash
+
+PYCHARM_BIN="${HOME}/App/pycharm/bin/pycharm.sh"
+
+if [ ! -e "${PYCHARM_BIN}" ]; then
+    echo "PyCharm is not installed."
+    exit 1
+fi
+
+exec ${PYCHARM_BIN} "$@" > /dev/null 2>&1 &

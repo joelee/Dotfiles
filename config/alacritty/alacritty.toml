@@ -15,6 +15,10 @@ class.general = "Alacritty"
 history = 50000
 multiplier = 3
 
+[shell]
+program = "/usr/bin/zellij"
+# args = [ "--layout default" ]
+
 [[keyboard.bindings]]
 action = "IncreaseFontSize"
 key = "Equals"
