@@ -29,6 +29,7 @@ pacman -S --noconfirm \
 	eza \
 	direnv \
 	fastfetch \
+	fd \
 	ffmpeg \
 	fish \
 	fisher \

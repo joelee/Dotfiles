@@ -1,11 +1,19 @@
+
 if type -q git
-    set -l EZA_CMD "eza --group-directories-first --icons=auto --time-style relative"
-    alias l="$EZA_CMD"
-    alias ls="eza"
-    alias la="$EZA_CMD -a"
-    alias ll="$EZA_CMD -lh --git"
-    alias lll="$EZA_CMD -lha --git"
-    alias llll="$EZA_CMD -lhaiHgM --git --extended --context"
+    alias g="git"
+    alias gst="git status"
+    alias gpoh="git push origin HEAD"
+    alias ga.="git add ."
+    alias gcm="git commit -m"
+    alias gfop="git fetch origin -p"
+    alias gdf="git diff"
+    alias gdfs="git diff --staged"
+    alias grbm="git rebase origin/master"
+    alias gmomm="git merge origin/master -m 'Merge remote-tracking branch origin/master'"
 else
     echo "GIT was not installed."
+end
+
+if type -q pre-commit
+    alias pcr="pre-commit run -a"
 end
