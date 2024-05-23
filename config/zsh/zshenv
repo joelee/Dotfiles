@@ -1,0 +1,23 @@
+export DOCUMENT_PATH="${HOME}/Documents"
+export PROJECT_PATH="${HOME}/Projects"
+export DESKTOP_PATH="${HOME}/Desktop"
+export DOTFILES_PATH="${HOME}/Dotfiles"
+
+. "$HOME/.cargo/env"
+
+export EDITOR='nvim'
+export DOCKER_HOST=unix:///Users/joseph.lee/.colima/docker.sock
+
+## AWS Profiles
+export AWS_PROFILE="default"
+
+# Compilation flags
+export ARCHFLAGS="-arch arm64"
+
+# App specific environment
+export FLYWAY_EDITION=community
+export SLUGIFY_USES_TEXT_UNIDECODE=yes
+export AIRFLOW_HOME=~/.airflow
+export GRAPHVIZ_DOT=/opt/homebrew/Cellar/graphviz/6.0.2/bin/dot
+
+export ZINIT_TRACK="zshenv $ZINIT_TRACK"

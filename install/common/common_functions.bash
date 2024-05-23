@@ -31,7 +31,11 @@ symlink_file () {
         echo "Source file '$1' does not exists."
         exit 1
     fi
-    src_file="$(realpath --relative-to=$(dirname $2) $(dirname $1))/$(basename $1)"
+    if [ "$(uname)" == "Darwin" ]; then
+        src_file="$(realpath $(dirname $1))/$(basename $1)"
+    else
+        src_file="$(realpath --relative-to=$(dirname $2) $(dirname $1))/$(basename $1)"
+    fi
     chk_config_dir "$(dirname $2)"
     backup_file "$2"
     echo "  Symlinking $2 to ${src_file} ..."

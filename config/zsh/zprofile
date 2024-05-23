@@ -1,0 +1,8 @@
+export SHELL_INIT_PATH="$HOME/.zsh_init"
+source "$SHELL_INIT_PATH/zsh.functions.sh"
+
+# SHELL_DEBUG="yes"
+
+# source_exec_path init.d
+
+export ZINIT_TRACK="zprofile $ZINIT_TRACK"

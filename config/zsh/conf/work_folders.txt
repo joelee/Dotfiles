@@ -1,0 +1,9 @@
+Projects/datahub/tenant-dev1
+Projects/datahub/tenant-dev2
+Projects/datahub/tenant-dev3
+Projects/datahub/tenant-master
+Projects/datahub/control-dev
+Projects/datahub/control-master
+Projects/Github
+Projects/Sandbox
+Projects/Joeworks/camwatch

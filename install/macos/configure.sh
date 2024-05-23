@@ -17,4 +17,4 @@ brew update && brew upgrade
 brew bundle --file="${BREW_FILE}"
 
 # Configure packages
-dot_configure git fish alacritty kitty starship tmux
+dot_configure git fish alacritty kitty starship tmux amethyst zellij

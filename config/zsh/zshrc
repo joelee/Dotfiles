@@ -1,0 +1,108 @@
+export SHELL_INIT_PATH="$HOME/.zsh_init"
+source "$SHELL_INIT_PATH/zsh.functions.sh"
+
+# SHELL_DEBUG="yes"
+
+eval "$(/opt/homebrew/bin/brew shellenv)"
+export HOMEBREW_NO_ENV_HINTS="yes"
+export HOMEBREW_GITHUB_API_TOKEN="$(get_secret homebrew_github_api_token)"
+
+source_exec_path init.d
+
+precmd() {
+    echo -ne "\033];$HOST1 ($USER) : $(basename $PWD)\007"
+}
+
+# End of .zshrc
+export ZINIT_TRACK="zshrc $ZINIT_TRACK"
+
+if [[ $TERM_PROGRAM == "iTerm.app" ]]; then
+  test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
+fi
+
+eval "$(starship init zsh)"
+
+#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
+export SDKMAN_DIR="$HOME/.sdkman"
+[[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
+
+compdef _ssh ssh
+
+export PATH="/opt/bin:$HOME/.local/bin:$HOME/.local/share/pypoetry/bin:$PATH"
+
+export POETRY_HOME="$HOME/.local/share/pypoetry"
+alias po=poetry
+
+source_exec_path rc.d
+
+export LIBTORCH=$(brew --cellar pytorch)/$(brew info --json pytorch | jq -r '.[0].installed[0].version')
+export LD_LIBRARY_PATH=${LIBTORCH}/lib:$LD_LIBRARY_PATH
+
+# ZSH Prompt Tools & Helpers
+# source /opt/homebrew/share/zsh-autocomplete/zsh-autocomplete.plugin.zsh
+source /opt/homebrew/opt/zsh-fast-syntax-highlighting/share/zsh-fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh
+source /opt/homebrew/share/zsh-autopair/autopair.zsh
+
+# ZSH Navigation Tool
+source /opt/homebrew/share/zsh-navigation-tools/zsh-navigation-tools.plugin.zsh
+autoload znt-history-widget
+zle -N znt-history-widget
+zle -N znt-cd-widget
+zle -N znt-kill-widget
+
+# ZSH Command History Search
+source /opt/homebrew/share/zsh-history-substring-search/zsh-history-substring-search.zsh
+
+# Prompt Key binds:
+# [!!] Also remember to update `~/.zsh_init/cheat_sheet.md`
+bindkey '^[[A' history-substring-search-up         # Up arrow
+bindkey '^[[B' history-substring-search-down       # Down Arrow
+bindkey -M vicmd 'k' history-substring-search-up
+bindkey -M vicmd 'j' history-substring-search-down
+bindkey "^[[5" znt-history-widget                  # PgUp to open History Widget (Ctrl-R handled by fzf)
+bindkey "^B" znt-cd-widget                         # Ctrl-B to open CD Widget
+bindkey "^Y" znt-kill-widget                       # Ctrl-Y to open Kill Process Widget
+
+fpath+=$HOME/.zfunc
+autoload -Uz compinit && compinit
+
+source_exec "$HOME/.zshrc.local"
+
+# Enable FZF
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+# Enable zoxide
+eval "$(zoxide init zsh)"
+alias cd="z"
+
+alias g="/Users/joseph.lee/Documents/Dotfiles/utils/g.sh"
+
+fd1() {
+  DIR=`find * -maxdepth 0 \( -type d -or -type l \) -print 2> /dev/null | fzf-tmux` \
+    && cd "$DIR"
+}
+
+fd() {
+    local DIR
+    if [ -z "$1" ]; then
+        DIR=`find * -maxdepth 3 \( -type d -or -type l \) -print 2> /dev/null | fzf-tmux`
+    else
+        DIR=`find * -maxdepth 3 \( -type d -or -type l \) -print 2> /dev/null | grep "$1" | fzf-tmux`
+    fi
+    if [ -n "$DIR" ]; then
+        echo " => $DIR"
+        cd "$DIR"
+    fi
+}
+
+cdp() {
+    local DIR
+    if [ -z "$1" ]; then
+        DIR=`cat ~/.zsh_init/work_folders.txt | fzf-tmux`
+    else
+        DIR=`cat ~/.zsh_init/work_folders.txt | grep "$1" | fzf-tmux`
+    fi
+    if [ -n "$DIR" ]; then
+        echo " => $HOME/$DIR"
+        cd "$HOME/$DIR"
+    fi
+}
