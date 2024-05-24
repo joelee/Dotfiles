@@ -1,0 +1,70 @@
+# Amethyst Custom settings for my Dotfiles
+# https://github.com/joelee/Dotfiles
+#
+# Reference: https://github.com/ianyh/Amethyst/blob/development/docs/configuration-files.md
+#
+
+layouts:
+  - tall
+  - joe-tv-focus
+  - joe-tv-ide
+  - joe-tv-dual
+  - middle-wide
+  - two-pane
+  - fullscreen
+  - floating
+  - tall-right
+
+mod1:
+  - option
+  - shift
+
+mod2:
+  - option
+  - shift
+  - control
+
+floating:
+  - com.apple.finder
+  - com.apple.ActivityMonitor
+  - com.apple.systempreferences
+  - com.apple.AppStore
+  - com.apple.calculator
+  - com.apple.DiskUtility
+  - com.apple.VoiceOverUtility
+  - com.runningwithcrayons.Alfred
+  - com.stairways.keyboardmaestro.editor
+  - com.nordvpn.NordVPN
+  - com.noodlesoft.Hazel
+  - com.via.configurator
+  - com.bitwarden.desktop
+  - com.tidal.desktop
+  - cc.ffitch.shottr
+  - org.grunenberg.PhotoStickies
+  - io.zsa.Keymapp
+  - jp.plentycom.app.SteerMouse
+
+command1:
+  mod: mod1
+  key: '['
+command2:
+  mod: mod1
+  key: ']'
+command3:
+  mod: mod2
+  key: '['
+command4:
+  mod: mod2
+  key: ']'
+
+use-canary-build: true
+mouse-follows-focus: true
+debug-layout-info: true
+restore-layouts-on-launch: false
+
+window-max-count: 12
+window-minimum-height: 640
+window-minimum-width: 480
+
+window-margins: true
+window-margin-size: 5

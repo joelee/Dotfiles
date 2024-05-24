@@ -16,8 +16,7 @@ history = 50000
 multiplier = 3
 
 [shell]
-program = "/usr/bin/zellij"
-# args = [ "--layout default" ]
+program = "/opt/homebrew/bin/fish"
 
 [[keyboard.bindings]]
 action = "IncreaseFontSize"
@@ -73,20 +72,20 @@ background = "#222222"
 foreground = "#F9F9F9"
 
 [font]
-size = 10.0
+size = 11.0
 
 [font.bold]
-family = "hack"
+family = "SauceCodePro NF"
 style = "Bold"
 
 [font.bold_italic]
-family = "hack"
+family = "SauceCodePro NF"
 style = "Bold Italic"
 
 [font.italic]
-family = "hack"
+family = "SauceCodePro NF"
 style = "Italic"
 
 [font.normal]
-family = "hack"
+family = "SauceCodePro NF"
 style = "Regular"

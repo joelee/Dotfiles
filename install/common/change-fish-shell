@@ -3,11 +3,36 @@
 source "$DOTFILES_HOME/init.sh"
 
 NEW_SHELL="fish"
-NEW_SHELL_PATH="/bin/$NEW_SHELL"
+
+if [ "$USER" == "root" ]; then
+    echo "This script should not be run as root."
+    exit 1
+fi
+
+# Looking for shell in the usual places
+if [ -e "/usr/bin/${NEW_SHELL}" ]; then
+    NEW_SHELL_PATH="/usr/bin/${NEW_SHELL}"
+elif [ -e "/opt/homebrew/bin/${NEW_SHELL}" ]; then
+    NEW_SHELL_PATH="/opt/homebrew/bin/${NEW_SHELL}"
+elif [ -e "/usr/local/bin/${NEW_SHELL}" ]; then
+    NEW_SHELL_PATH="/usr/local/bin/${NEW_SHELL}"
+elif [ -e "/bin/${NEW_SHELL}" ]; then
+    NEW_SHELL_PATH="/bin/${NEW_SHELL}"
+else
+    echo "${NEW_SHELL} shell was not found."
+    exit 1
+fi
+
+echo "${NEW_SHELL} shell found in ${NEW_SHELL_PATH}."
+
+if [ -z "$(cat /etc/shells | grep $NEW_SHELL_PATH)" ]; then
+    echo "${NEW_SHELL} shell is not listed in /etc/shells. Adding it."
+    sudo sh -c "echo $NEW_SHELL_PATH >> /etc/shells"
+fi
 
 if [ -z $(which $NEW_SHELL_PATH) ]; then
-    echo "${NEW_SHELL^} shell is not installed."
-    exit 1
+    echo "${NEW_SHELL_PATH} is not executable."
+    exit 41
 fi
 
 if [ "$SHELL" == "$NEW_SHELL_PATH" ]; then

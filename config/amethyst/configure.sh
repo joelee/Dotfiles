@@ -17,8 +17,11 @@ source "$DOTFILES_HOME/init.sh"
 LAYOUT_PATH="${BASE_PATH}/Layouts"
 AMETHYST_PATH="${HOME}/Library/Application Support/Amethyst"
 
-backup_file "${AMETHYST_PATH}/Layouts"
+# Amethyst 0.21.0 Layouts do not support symlinks. Copy the files instead.
+# @todo File a bug report
+cp -f "${LAYOUT_PATH}"/*.js "${AMETHYST_PATH}/Layouts"
 
+# backup_file "${AMETHYST_PATH}/Layouts"
 # cd "${AMETHYST_PATH}"
 # ln -s "${BASEDIR}/Layouts"
-symlink_file "${LAYOUT_PATH}" "${AMETHYST_PATH}/Layouts"
+# symlink_file "${LAYOUT_PATH}" "${AMETHYST_PATH}/Layouts"

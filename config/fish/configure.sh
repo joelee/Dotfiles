@@ -13,10 +13,3 @@ symlink_file ${source_cfg_file} ${target_cfg_file}
 source_cfg_dir="${BASE_PATH}/conf.d"
 target_cfg_dir="${cfg_dir}/conf.d"
 symlink_file ${source_cfg_dir} ${target_cfg_dir}
-
-if type -q fisher
-    echo "Installing extensions via Fisher..."
-    fisher install jorgebucaran/nvm.fish
-else
-    echo "Fisher was not installed."
-fi

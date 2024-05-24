@@ -9,10 +9,17 @@ if [ -z "${RSYNC}" ]; then
 	exit 1
 fi
 
-if [ -z "${SSH_BACKUP_PREFIX}" ]; then
-	echo "SSH_BACKUP_PREFIX was not set in the .env file"
+if [ -z "${SSH_BACKUP_USERHOST}" ]; then
+	echo "SSH_BACKUP_USERHOST was not set in the .env file"
 	exit 99
 fi
+
+if [ -z "${SSH_BACKUP_TARGET_PATH}" ]; then
+	echo "SSH_BACKUP_TARGET_PATH was not set in the .env file"
+	exit 99
+fi
+
+SSH_BACKUP_PREFIX="${SSH_BACKUP_USERHOST}:${SSH_BACKUP_TARGET_PATH}"
 
 if [ -z "${SSH_BACKUP_PORT}" ]; then
 	SSH_BACKUP_PORT=22
@@ -62,11 +69,11 @@ fi
 
 ts="$(date +%y%m%d%H%M%S.%N)"
 log_path="${HOME}/.local/logs/rsync/${target_endpoint}"
-target_path="${SSH_BACKUP_PREFIX}/${target_endpoint}/"
+target_path="${SSH_BACKUP_PREFIX}/${target_endpoint}"
 
 archive_opt="-azC --partial --delete --backup --backup-dir=.backup/${ts}"
-output_opt="-hi --log-file=${log_path}/${ts}.log"
-filter_opt="--exclude=.git --exclude=.backup --no-owner --no-group --no-perms"
+output_opt="-hivP --log-file=${log_path}/${ts}.log"
+filter_opt="--exclude=.git --exclude=.backup --exclude=.DS_Store --exclude=.localized --exclude=.tmp.* --no-owner --no-group --no-perms"
 
 if [ ! -e "${log_path}" ]; then
 	mkdir -p "${log_path}"
@@ -78,13 +85,25 @@ fi
 
 echo "Sync2Backup: ${source_path} ==> ${target_path}"
 echo " "
+
 if [ -n "$print_only" ]; then
-	echo "$RSYNC ${archive_opt} ${output_opt} ${filter_opt} -e 'ssh -p ${SSH_BACKUP_PORT}' ${source_path}/* ${target_path}"
+	exec_line="${RSYNC} ${archive_opt} ${output_opt} ${filter_opt} -e \"ssh -p ${SSH_BACKUP_PORT}\" \"${source_path}\" \"${target_path}\""
+	echo "${exec_line}"
 	exit 0
 fi
 
-$RSYNC ${archive_opt} ${output_opt} ${filter_opt} -e "ssh -p ${SSH_BACKUP_PORT}" \
-    ${source_path}/* ${target_path}
+# Create target directory if not exists
+local_path="${target_path#*:}"
+ssh -p ${SSH_BACKUP_PORT} ${SSH_BACKUP_USERHOST} "[ ! -e \"${local_path}\" ] && mkdir -p \"${local_path}\""
+
+# Run the backup with rsync
+${RSYNC} ${archive_opt} ${output_opt} ${filter_opt} -e "ssh -p ${SSH_BACKUP_PORT}" "${source_path}/" "${target_path}"
+
+if [ $? -ne 0 ]; then
+	echo "Error: Rsync failed. Command:"
+	echo "${exec_line}"
+	exit 1
+fi
 
 echo " "
 echo " "

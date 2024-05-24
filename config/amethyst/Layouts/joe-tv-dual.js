@@ -1,3 +1,10 @@
+/**
+ * Joseph TV IDE Layout for Amethyst
+ * My custom layout for my 48" LG OLED C1 TV
+ *
+ * 2 x Main panes at the bottom 60% of the screen
+ * Secondary panes are the top 40% of the screen
+ */
 function layout() {
     return {
         name: "Joseph TV Dual",

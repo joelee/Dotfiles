@@ -1,5 +1,5 @@
 # Run ssh-agent once
-#
+#  [!] Do not run this on a multi-user system.
 
 if test -e $HOME/.ssh/id_ed25519
     if test -z (pgrep ssh-agent)

@@ -1,3 +1,12 @@
+/**
+ * Joseph TV IDE Layout for Amethyst
+ * My custom layout for my 48" LG OLED C1 TV
+ *
+ * Main pane is the bottom 60% of the screen
+ * Secondary panes are the top 40% of the screen (Maximum of 3 panes)
+ * The overflow panes are placed in the bottom centre of the screen.
+ */
+
 function layout() {
     return {
         name: "Joseph TV IDE",
@@ -132,12 +141,14 @@ function layout() {
                     }
 
                 /*****
-                 Process Second Pane
-                 1st 3 panes on top
-                 the rest - bottom centre zoomed
-                *****/
+                 * Process non-Main Panes
+                 */
                 } else if (hasSecondaryPane) {
                     const secondaryPaneIndex = index - mainPaneCount
+                    /*****
+                     Process Second Pane
+                     1st 3 panes on top
+                    */
                     if (secondaryPaneIndex < 3) {
                         const secondaryPaneWindowWidth = screenFrame.width / 3;
                         frame = {
@@ -146,6 +157,10 @@ function layout() {
                             width: secondaryPaneWindowWidth,
                             height: secondaryPaneWindowHeight
                         }
+
+                    /*****
+                     * Overflow panes are placed in the bottom centre of the screen.
+                     */
                     } else {
                         const u_width = screenFrame.width / 6
                         const u_height = screenFrame.height / 3

@@ -1,6 +1,6 @@
 function layout() {
     return {
-        name: "Joseph TV Main",
+        name: "Joseph TV Test 1",
         initialState: {
             mainPaneCount: 0,
             mainPaneRatio: 0.6,
