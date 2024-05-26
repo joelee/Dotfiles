@@ -45,6 +45,9 @@ pacman -S --noconfirm \
 	podman-docker \
 	pre-commit \
 	pyenv \
+	python \
+	python-neovim \
+	python-pip \
 	python-pipx \
 	python-poetry \
 	rclone \
@@ -52,6 +55,8 @@ pacman -S --noconfirm \
 	rustup \
 	starship \
 	sxhkd \
+	tmux \
+	tree-sitter \
 	wget \
 	zoxide \
 	zsh \
@@ -59,7 +64,6 @@ pacman -S --noconfirm \
 	zsh-completions \
 	zsh-history-substring-search \
 	zsh-syntax-highlighting
-
 
 echo ""
 echo "Install App packages..."
