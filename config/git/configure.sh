@@ -2,9 +2,8 @@
 # GIT configuration set up
 
 BASE_PATH="$(dirname $0)"
-source "$DOTFILES_HOME/init.sh"
 
-# source "${DOTFILES_PATH}/install/common/common_functions.bash"
+source "$BASE_PATH/../../common/common_functions.bash"
 
 if [ -z "$(which git)" ]; then
     echo "Git is not installed."

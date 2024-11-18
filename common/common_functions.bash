@@ -1,5 +1,22 @@
 #!/bin/bash
 
+if [ -z "${DOTFILES_HOME}" ]; then
+    export DOTFILES_HOME="${HOME}/Dotfiles"
+fi
+
+if [ -z "${DOTFILES_LOCAL_PATH}" ]; then
+    export DOTFILES_LOCAL_PATH="${HOME}/.local/dotfiles"
+fi
+
+ENV_FILE="${DOTFILES_HOME}/.env"
+if [ ! -e "${ENV_FILE}" ]; then
+    echo "ENV file not found at ${ENV_FILE}"
+    exit 99
+fi
+
+source "${ENV_FILE}"
+
+
 dotfiles_test () {
     echo "OK: $1"
 }
@@ -54,6 +71,7 @@ copy_file () {
 }
 
 dot_configure () {
+    echo "Configuring ..."
     for item in "$@"; do
         cfg_script="${DOTFILES_PATH}/config/${item}/configure.sh"
         if [ ! -e "$cfg_script" ]; then
@@ -61,6 +79,6 @@ dot_configure () {
             exit 0
         fi
         echo "Configuring ${item} ..."
-        ${cfg_script}
+        echo "Test: ${cfg_script}"
     done
 }
