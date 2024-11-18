@@ -42,7 +42,7 @@ sudo pacman -S --noconfirm \
 	npm \
 	nvm \
 	ollama \
-        docker \
+    docker \
 	docker-compose \
 	pre-commit \
 	pyenv \
@@ -54,6 +54,7 @@ sudo pacman -S --noconfirm \
 	rclone \
 	ruby \
 	rustup \
+	starship \
 	sxhkd \
 	tk \
 	tmux \
