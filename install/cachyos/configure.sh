@@ -1,6 +1,9 @@
 #!/bin/bash
 
 BASE_PATH=$(dirname "$0")
+export OS_TAG="archlinux"
+
+source "${BASE_PATH}/../../common/common_functions.bash"
 
 # Install packages
 if [ ! -e "${DOTFILES_LOCAL_PATH}/packages_installed" ]; then

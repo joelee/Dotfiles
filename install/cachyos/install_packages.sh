@@ -76,6 +76,10 @@ sudo pacman -S --noconfirm \
 	kitty \
 	libreoffice-fresh \
 	neovide \
+	rofi \
+	rofi-calc \
+	rofimoji \
+	syncthing \
 	telegram-desktop \
 	thunar \
 	vlc \
@@ -85,7 +89,11 @@ sudo pacman -S --noconfirm \
 sudo pacman -S fuse2 webkit2gtk webkit2gtk-4.1
 
 
-# App packages installed by yay
+# Required to enable Yubikey authentication
+sudo pacman -S pam-u2f yubikey-manager yubico-pam
+
+
+# App packages I use: installed by yay
 #
 # yay -S --noconfirm novelwriter
 # yay -S --noconfirm orca-slicer

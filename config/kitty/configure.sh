@@ -2,7 +2,7 @@
 # Kitty terminal configuration set up
 
 BASE_PATH="$(dirname $0)"
-source "$DOTFILES_HOME/init.sh"
+source "${HOME}/Dotfiles/common/common_functions.bash"
 
 cfg_dir="${HOME}/.config/kitty"
 

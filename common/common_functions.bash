@@ -8,6 +8,16 @@ if [ -z "${DOTFILES_LOCAL_PATH}" ]; then
     export DOTFILES_LOCAL_PATH="${HOME}/.local/dotfiles"
 fi
 
+if [ -z "${OS_TAG}" ]; then
+    if [ -n "$(which pacman)" ]; then
+        export OS_TAG="arch"
+    elif [ -n "$(which brew)" ]; then
+        export OS_TAG="macos"
+    else
+        export OS_TAG="unknown"
+    fi
+fi
+
 ENV_FILE="${DOTFILES_HOME}/.env"
 if [ ! -e "${ENV_FILE}" ]; then
     echo "ENV file not found at ${ENV_FILE}"
@@ -81,4 +91,16 @@ dot_configure () {
         echo "Configuring ${item} ..."
         echo "Test: ${cfg_script}"
     done
+}
+
+install_package () {
+    echo "Installing $@ ..."
+    if [ -n "$(which pacman)" ]; then
+        sudo pacman -S --noconfirm $@
+    elif [ -n "$(which brew)" ]; then
+        brew install $@
+    else
+        echo "Package installer not found!"
+        exit 1
+    fi
 }
