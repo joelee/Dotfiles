@@ -2,8 +2,9 @@
 # GIT configuration set up
 
 BASE_PATH="$(dirname $0)"
-
 source "$BASE_PATH/../../common/common_functions.bash"
+
+check_configured git
 
 if [ -z "$(which git)" ]; then
     echo "Git is not installed."
@@ -32,3 +33,5 @@ git config --global core.excludesfile "${git_ignore}"
 
 echo "${git_config} configured!"
 echo " "
+
+mark_configured git

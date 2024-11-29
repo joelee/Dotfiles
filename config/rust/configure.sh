@@ -2,7 +2,9 @@
 # Rust configuration set up
 
 BASE_PATH="$(dirname $0)"
-source "$DOTFILES_HOME/init.sh"
+source "$BASE_PATH/../../common/common_functions.bash"
+
+check_configured rust
 
 RUSTUP="$(which rustup)"
 
@@ -26,3 +28,5 @@ rustup component add rust-src
 rustup component add rust-analyzer
 rustup component add rustfmt
 rustup component add clippy
+
+mark_configured rust
