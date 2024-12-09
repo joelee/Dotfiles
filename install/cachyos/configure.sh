@@ -18,6 +18,10 @@ if [ ! -e "${LOCAL_BIN}" ]; then
     mkdir -p "${LOCAL_BIN}"
 fi
 
+if [ -n "${YUBIKEY_AUTH_USER}" ]; then
+    sudo sh -c 'echo "${YUBIKEY_AUTH_USER}" >> /etc/yubikeys'
+fi
+
 # Configure packages
 echo "dot_configure git fish alacritty kitty tmux"
 
