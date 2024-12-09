@@ -1,24 +1,19 @@
 #!/bin/bash
-# NeoVim and LazyVim set up
+# NeoVim set up
 
 BASE_PATH="$(dirname $0)"
-source "$DOTFILES_HOME/init.sh"
+source "$BASE_PATH/../../common/common_functions.bash"
 
-if [ -e "${DOTFILES_LOCAL_PATH}/lazyvim" ]; then
-    echo "LazyVim has been installed. To reinstall remove ${DOTFILES_LOCAL_PATH}/lazyvim"
-    exit 0
-fi
+check_configured nvim
 
 cfg_dir="${HOME}/.config/nvim"
 backup_file "${cfg_dir}"
-
-git clone https://github.com/LazyVim/starter "${cfg_dir}"
-rm -rf "${cfg_dir}/.git"
+mkdir -p "${cfg_dir}"
 
 init_file="${cfg_dir}/init.lua"
-echo "" >> "${init_file}"
-echo "-- User custom configuration" >> "${init_file}"
-echo "vim.g.loaded_perl_provider = 0" >> "${init_file}"
-echo "vim.g.loaded_ruby_provider = 0" >> "${init_file}"
 
-touch "${DOTFILES_LOCAL_PATH}/lazyvim"
+symlink_file "${BASE_PATH}/init.lua" "${cfg_dir}/init.lua"
+symlink_file "${BASE_PATH}/lua" "${cfg_dir}/lua"
+
+mark_configured nvim
+

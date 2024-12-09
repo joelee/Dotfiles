@@ -1,3 +1,6 @@
+[shell]
+program = "/opt/homebrew/bin/fish"
+
 [colors.bright]
 black = "#545454"
 blue = "#94bff3"
@@ -30,7 +33,7 @@ family = "hack"
 style = "Bold"
 
 [font.bold_italic]
-family = "monospace"
+family = "hack"
 style = "Bold Italic"
 
 [font.italic]

@@ -1,6 +1,7 @@
 #!/bin/bash
 
-source "$DOTFILES_HOME/common/common_functions.bash"
+BASE_PATH="$(dirname $0)"
+source "${BASE_PATH}/common_functions.bash"
 
 NEW_SHELL="fish"
 
@@ -42,3 +43,4 @@ fi
 
 echo "Changing your default shell from $SHELL to $NEW_SHELL_PATH"
 chsh -s $NEW_SHELL_PATH $USER
+
