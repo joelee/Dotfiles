@@ -9,10 +9,13 @@ layouts:
   - joe-tv-focus
   - joe-tv-ide
   - joe-tv-dual
-  - middle-wide
   - two-pane
   - fullscreen
   - floating
+  - middle-wide
+  - 4column-left
+  - widescreen-tall
+  - widescreen-tall-right
   - tall-right
 
 mod1:
@@ -23,6 +26,73 @@ mod2:
   - option
   - shift
   - control
+
+command1:
+  mod: mod1
+  key: '['
+command2:
+  mod: mod1
+  key: ']'
+command3:
+  mod: mod1
+  key: ';'
+command4:
+  mod: mod1
+  key: "'"
+
+select-tall-layout:
+  mod: mod1
+  key: a
+
+select-widescreen-tall-layout:
+  mod: mod2
+  key: a
+
+select-middle-wide-layout:
+  mod: mod1
+  key: s
+
+select-4column-left-layout:
+  mod: mod2
+  key: s
+
+select-two-pane-layout:
+  mod: mod1
+  key: d
+
+select-joe-tv-dual-layout:
+  mod: mod2
+  key: d
+
+select-fullscreen-layout:
+  mod: mod1
+  key: f
+
+select-floating-layout:
+  mod: mod2
+  fey: f
+
+select-joe-tv-focus-layout:
+  mod: mod1
+  key: g
+
+select-joe-tv-ide-layout:
+  mod: mod2
+  key: g
+
+
+use-canary-build: true
+mouse-follows-focus: true
+debug-layout-info: true
+restore-layouts-on-launch: false
+
+window-max-count: 12
+window-minimum-height: 640
+window-minimum-width: 480
+
+window-margins: true
+window-margin-size: 5
+
 
 floating:
   - com.apple.finder
@@ -44,27 +114,3 @@ floating:
   - io.zsa.Keymapp
   - jp.plentycom.app.SteerMouse
 
-command1:
-  mod: mod1
-  key: '['
-command2:
-  mod: mod1
-  key: ']'
-command3:
-  mod: mod2
-  key: '['
-command4:
-  mod: mod2
-  key: ']'
-
-use-canary-build: true
-mouse-follows-focus: true
-debug-layout-info: true
-restore-layouts-on-launch: false
-
-window-max-count: 12
-window-minimum-height: 640
-window-minimum-width: 480
-
-window-margins: true
-window-margin-size: 5

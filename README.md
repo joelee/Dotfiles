@@ -8,7 +8,6 @@ cd $HOME
 git clone https://github.com/joelee/Dotfiles.git
 
 cd Dotfiles
-export DOTFILES_HOME="$(pwd)"
 
 cp .env.sample .env
 # Edit the .env file
