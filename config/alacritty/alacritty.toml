@@ -88,6 +88,14 @@ hide_when_typing = true
 mouse = "Middle"
 action = "PasteSelection"
 
+[[mouse.bindings]]
+mouse = "Back"
+action = "Paste"
+
+[[mouse.bindings]]
+mouse = "Forward"
+action = "Copy"
+
 [keyboard]
 [[keyboard.bindings]]
 key = "Paste"

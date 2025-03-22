@@ -4,21 +4,14 @@
 BASE_PATH="$(dirname $0)"
 source "$DOTFILES_HOME/init.sh"
 
-if [ -e "${DOTFILES_LOCAL_PATH}/lazyvim" ]; then
-    echo "LazyVim has been installed. To reinstall remove ${DOTFILES_LOCAL_PATH}/lazyvim"
+if [ -e "${DOTFILES_LOCAL_PATH}/nvim" ]; then
+    echo "kickstarter.nvim has been installed. To reinstall remove ${DOTFILES_LOCAL_PATH}/nvim"
     exit 0
 fi
 
 cfg_dir="${HOME}/.config/nvim"
 backup_file "${cfg_dir}"
 
-git clone https://github.com/LazyVim/starter "${cfg_dir}"
-rm -rf "${cfg_dir}/.git"
+git clone https://github.com/joelee/kickstart.nvim "${cfg_dir}"
 
-init_file="${cfg_dir}/init.lua"
-echo "" >> "${init_file}"
-echo "-- User custom configuration" >> "${init_file}"
-echo "vim.g.loaded_perl_provider = 0" >> "${init_file}"
-echo "vim.g.loaded_ruby_provider = 0" >> "${init_file}"
-
-touch "${DOTFILES_LOCAL_PATH}/lazyvim"
+touch "${DOTFILES_LOCAL_PATH}/nvim"
