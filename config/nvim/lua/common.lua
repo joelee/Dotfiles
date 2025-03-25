@@ -5,11 +5,15 @@ vim.cmd("set expandtab")
 vim.cmd("set tabstop=2")
 vim.cmd("set softtabstop=2")
 vim.cmd("set shiftwidth=2")
+vim.cmd("set fileformat=unix")
+
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
 vim.g.background = "light"
 vim.g.have_nerd_font = true
+vim.g.loaded_perl_provider = false
+vim g.loaded_ruby_provider = false
 
 vim.opt.swapfile = false
 
